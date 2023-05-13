@@ -1,35 +1,24 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const { database } = require("../config/seque-config");
-const sequelize = new Sequelize("mysql");
-
-const User = sequelize.define(
-  "review",
-  {
-    // Model attributes are defined here
+const review = (Sequelize, sequelize) => {
+  return sequelize.define("review", {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
+      type: Sequelize.INTEGER,
       autoIncrement: true,
+      primaryKey: true,
       allowNull: false,
     },
     id_user: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
-      // allowNull defaults to true
     },
     role: {
-      type: DataTypes.STRING(10),
+      type: Sequelize.STRING(10),
       allowNull: false,
     },
     message: {
-      type: DataTypes.TEXT,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
-  },
-  {
-    // Other model options go here
-  }
-);
+  });
+};
 
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+module.exports = review;
