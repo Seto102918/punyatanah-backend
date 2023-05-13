@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
 const { database } = require("../config/seque-config");
-const review = require("../models/review");
 
 const connect = new Sequelize(
   database.development.database,
@@ -15,7 +14,7 @@ const connect = new Sequelize(
 const db = {
   connect,
   Sequelize,
-  review,
+  review: require("../models/review")(Sequelize, connect),
 };
 
 module.exports = db;
