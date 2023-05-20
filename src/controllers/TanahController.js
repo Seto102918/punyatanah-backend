@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 exports.getListTanah = async (req, res, next) => {
     const filter = req.query;
-    const attributesChosen = ["title", "size", "price", "regency.province_name", "regency.regency_name", "user.full_name"];
+    // const attributesChosen = ["title", "size", "price", "regency.province_name", "regency.regency_name", "user.full_name"];
     console.log('filter', filter);
 
     db.regency.hasMany(db.tanah, {foreignKey: 'id_regency'})
@@ -19,7 +19,7 @@ exports.getListTanah = async (req, res, next) => {
 
     if (filter == {}) {
         let listTanah = await db.tanah.findAll({
-            attributes: attributesChosen,
+            // attributes: attributesChosen,
             include: [
                 {
                     model: db.regency,
@@ -40,7 +40,7 @@ exports.getListTanah = async (req, res, next) => {
                 $like: filter['title'],
               },
             },
-            attributes: attributesChosen,
+            // attributes: attributesChosen,
             include: [
                 {
                     model: db.regency,
@@ -77,7 +77,7 @@ exports.getListTanah = async (req, res, next) => {
 
         listTanah = await db.tanah.findAll({
             where: whereFilter,
-            attributes: attributesChosen,
+            // attributes: attributesChosen,
             include: [
                 {
                     model: db.regency,

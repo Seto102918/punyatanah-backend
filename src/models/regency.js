@@ -11,9 +11,9 @@ const regency = (Sequelize, sequelize) => {
       regency_name: {
         type: Sequelize.STRING(50),
       },
-      province_name: {
-        type: Sequelize.STRING(50),
-      },
+      // province_name: {
+      //   type: Sequelize.STRING(50),
+      // },
     },
     {
       timestamps: true,
