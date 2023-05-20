@@ -1,4 +1,4 @@
-const tanah = (sequelize, Sequelize) => {
+const tanah = (Sequelize, sequelize) => {
   return sequelize.define(
     "tanah",
     {

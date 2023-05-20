@@ -1,15 +1,10 @@
 const Sequelize = require("sequelize");
-const { database } = require("../config/seque-config");
+const { config } = require("../config/config");
 
-const connect = new Sequelize(
-  database.development.database,
-  database.development.username,
-  database.development.password,
-  {
-    host: database.development.host,
-    dialect: "mysql",
-  }
-);
+let connect = new Sequelize('test_hs', 'admin', 'admin', {
+  host:'localhost',
+  dialect: "mysql",
+});
 
 const db = {
   connect,
