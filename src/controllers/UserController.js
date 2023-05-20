@@ -14,9 +14,9 @@ exports.registerNewUser = async (req, res, next) => {
         return;
     }
 
-    const user = await db.user.findOne({ where: { email } });
+    const user = await db.user.findOne({ where: { email , phone , username} });
     if (user) {
-        res.status(400).send("The email address already exists.");
+        res.status(400).send("The email or phone or username already exists.");
         return;
     }
 
