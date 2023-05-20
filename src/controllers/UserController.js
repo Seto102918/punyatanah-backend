@@ -3,7 +3,12 @@ exports.registerNewUser = async (req, res, next) => {
     const db = require("../database/connection");
 
     console.log(req.body)
-    const { full_name, username, date_of_birth, phone, email, password, image } = req.body;
+    const { full_name, phone, email, password, image } = req.body;
+
+    date_of_birth = new Date(); //sementara
+
+    username = makeid(6);
+
     if (!full_name || !username || !email || !password ||!phone ||!date_of_birth) {
         res.status(400).send("Please provide all required information.");
         return;
@@ -48,5 +53,17 @@ exports.login = async (req, res, next) => {
         user,
         token,
     });
+}
+
+function makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }
 
