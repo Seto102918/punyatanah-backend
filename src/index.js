@@ -14,7 +14,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use("/", router);
 
-connection.connect.sync({ force: true });
+connection.connect.sync();
 console.log("a");
 
 app.listen(process.env.SERVER_PORT, () => {
