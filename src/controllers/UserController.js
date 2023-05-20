@@ -10,26 +10,37 @@ exports.registerNewUser = async (req, res, next) => {
     username = makeid(6);
 
     if (!full_name || !username || !email || !password ||!phone ||!date_of_birth) {
-        res.status(400).send("Please provide all required information.");
+        res.status(400).send({
+            message: "Please provide all required information."
+        })
         return;
     }
 
-    const user = await db.user.findOne({ where: { email , phone , username} });
+    const user = await db.user.findOne({ where: { email , phone , username } });
     if (user) {
-        res.status(400).send("The email or phone or username already exists.");
+        res.status(400).send({
+            message: "The email or phone or username already exists."
+        });
         return;
     }
 
-    const newUser = await db.user.create({
-        full_name, username, date_of_birth, phone, email, password, image
-    });
+    try{
+        const newUser = await db.user.create({
+            full_name, username, date_of_birth, phone, email, password, image
+        });
+    }
+    catch{
+        return res.status(400).send("Error Saving data");
+    }
 
-    res.status(201).send({
+
+    return res.status(201).send({
         username
     });
 };
 
 exports.login = async (req, res, next) => {
+    const db = require("../database/connection");
     const { email, password } = req.body;
     if (!email || !password) {
         res.status(400).send("Please provide all required information.");
@@ -51,7 +62,6 @@ exports.login = async (req, res, next) => {
 
     res.status(200).send({
         user,
-        token,
     });
 }
 

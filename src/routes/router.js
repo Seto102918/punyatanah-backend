@@ -13,6 +13,8 @@ router.get("/test", Controller.test);
 
 //user
 router.post("/user/registerNewUser", UserController.registerNewUser);
+router.post("/user/login", UserController.login);
+
 
 
 
