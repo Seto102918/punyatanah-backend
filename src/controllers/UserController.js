@@ -31,7 +31,7 @@ exports.login = async (req, res, next) => {
         return;
     }
 
-    const user = await db.users.findOne({ where: { email } });
+    const user = await db.user.findOne({ where: { email } });
     if (!user) {
         res.status(401).send("The user does not exist.");
         return;
@@ -42,10 +42,11 @@ exports.login = async (req, res, next) => {
         return;
     }
 
-    const token = await user.generateAuthToken();
+    // const token = await user.generateAuthToken();
 
     res.status(200).send({
         user,
         token,
     });
 }
+
